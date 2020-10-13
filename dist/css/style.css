@@ -359,7 +359,7 @@ body {
         top: 10rem;
         z-index: 10;
         padding: 2rem 0;
-        width: 34rem;
+        width: 30rem;
         background-color: #fff;
         box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
         visibility: visible;
@@ -368,7 +368,6 @@ body {
       }
 
   .likes__fig img {
-  border-radius: 50px;
   list-style: none;
   width: 35%;
   height: 35%;
@@ -431,6 +430,11 @@ body {
   padding-left: 6px;
     }
 
+  @media (max-width: 1000px) {
+      .likes__panel {
+        width: 15rem;
+      }
+        }
 
 /*** Icon Bar ***/
 
