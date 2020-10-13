@@ -13,6 +13,7 @@ import * as likesView from './views/likesview';
                - Current Job object
                - Saved Jobs
                                          **/
+                                        
 
 const state = {};
 
@@ -142,3 +143,11 @@ const controlLike = () => {
         controlLike();
      }
  });
+
+ // ** Header title refresh function ** // 
+
+ const titleClickRefresh = () => {
+   elements.headerTitle.addEventListener('click', e => {
+      location.reload();
+       });
+ }
