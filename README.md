@@ -8,5 +8,8 @@ Features
   - Click on any one query at a time. A full job description with an image and links will load.
   - Like your favorite jobs via the 'like' option. Explore liked jobs in the likes panel.
   
+  Host link:
+  https://remotetechjobs.netlify.app/
+  
 
 © 2020 Dylan Yudis
