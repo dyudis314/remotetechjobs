@@ -151,6 +151,6 @@ const controlLike = () => {
       location.reload();
        });
  }
- console.log(titleClickRefresh);
+
  titleClickRefresh();
  
