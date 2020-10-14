@@ -144,10 +144,11 @@ const controlLike = () => {
      }
  });
 
- // ** Header title refresh function ** // 
+ // ** Header title refresh ** // 
 
  const titleClickRefresh = () => {
    elements.headerTitle.addEventListener('click', e => {
       location.reload();
        });
  }
+ titleClickRefresh();
