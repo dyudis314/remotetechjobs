@@ -1,5 +1,5 @@
-# remotetechjobs
-Remote Tech Jobs is a web project that helps people search for remote opportunities in tech.
+# remoteup
+Remoteup is a web project that helps people search for remote opportunities in tech.
  It was developed with a modern JavaScript workflow. The application is powered by https://jobs.github.com/
 
 Features
