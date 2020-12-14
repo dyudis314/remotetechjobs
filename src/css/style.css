@@ -5,7 +5,8 @@
 
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+ }
 
 *,
 *::before,
@@ -36,7 +37,6 @@ body {
 
 
 
- 
 
 .container {
   background-color: #eeeceb;
@@ -267,31 +267,20 @@ cursor: pointer;
     font-size: 1.5rem;
     }
 
-    /* Collapsible Content */
-    .accordion {
-      width: 800px;
-    }
+    /* Collapsible Content (Accordion) */
+   .accordion__button {
+     display: block;
+     width: 100%;
+     padding: 15px;
+     border: none;
+     outline: none;
+     cursor: pointer;
+     background: 33333;
+     color: white;
+     transition: background 0.2s;
+   }
 
-    .accordion .contentBox {
-    position: relative;
-  margin: 10px 20px;
-    }
     
-    .accordion .contentBox .label {
-      position: relative;
-      padding: 10px;
-      background: #2694af;
-      color: fff;
-      cursor: pointer;
-    }
-
-    .accordion .contentBox .label:before {
-      content: '+';
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-    }
     
 /*** Pagination Buttons ***/
 

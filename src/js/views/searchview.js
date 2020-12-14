@@ -30,29 +30,24 @@ export const limitJobDesAndUrl = (des, limit = 25) => {
 const renderJob = job => {
 const markup = `
 
-        <li>
-            <a class="results__link" href="#${job.id}">
-            
-            <div class="accordion">
-                <div class="label"
-                    <h1 class="job_role">${job.title}</h2> 
-                    <h2 class="company_name">${job.company}</h2>
-                    <h3 class=""><i>${job.location}</i></h3>
-                </div>
-
-                     <div class="contentBox">
-                            <div class="content">
+    <li>
+        <div class="accordion">
+            <button type="button" class="accordion__button">See More
+                <a class="results__link" href="#${job.id}">
+                     <h1 class="job_role">${job.title}</h2> 
+                     <h2 class="company_name">${job.company}</h2>
+                      <h3 class=""><i>${job.location}</i></h3>
+            </button>
+            <div class="accordion__content">
                                 <p class="job_description"><span class="visible-xs-inline"><br></span>${job.description}</p>
                                 <br>
                                 <a href="${job.redirectURL}" target="_blank" class="link">${job.redirectURL}</a>
                                 <br><br>
                                 <p class="job_createdAt">Posted on: ${job.createdAt}</p>
-                        
-                    </div>
-                </div>
             </div>
+        </div>        
                 
-         </li>
+    </li>
 
          <br> <br>
 `;
