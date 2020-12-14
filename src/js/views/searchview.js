@@ -33,12 +33,12 @@ const markup = `
     <li>
         <div class="accordion">
             <button type="button" class="accordion__button">See More
-                <a class="results__link" href="#${job.id}">
+                <a class="results__link" href="#${job.id}"></a>
                      <h1 class="job_role">${job.title}</h2> 
                      <h2 class="company_name">${job.company}</h2>
                       <h3 class=""><i>${job.location}</i></h3>
             </button>
-            
+
             <div class="accordion__content">
                                 <p class="job_description"><span class="visible-xs-inline"><br></span>${job.description}</p>
                                 <br>
