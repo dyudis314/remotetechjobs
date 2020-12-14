@@ -11,7 +11,7 @@ export const renderJob = (job, isLiked) => {
           <use href="img/icons.svg#icon-heart${isLiked ? '' : '-outlined'}"></use>
       </svg>
       </button>
-  </div>
+
 
     <figure class="job__fig">
         <h1 class="job_role">${job.title}</h1> 
@@ -26,5 +26,5 @@ export const renderJob = (job, isLiked) => {
             <p class="job_createdAt">Posted on: ${job.createdAt}</p>
     </figure> 
   `;
-  elements.job.insertAdjacentHTML('afterbegin', markup);
+  elements.job.insertAdjacentHTML('beforeend', markup);
 };

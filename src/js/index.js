@@ -7,6 +7,7 @@ import Job from './models/job';
 import Likes from './models/likes';
 import * as likesView from './views/likesview';
 
+
       /**       Global State of App 
    
                - Job Search object
@@ -14,6 +15,7 @@ import * as likesView from './views/likesview';
                - Saved Jobs
                                          **/
                                         
+
 
 const state = {};
 
@@ -62,7 +64,7 @@ elements.searchResPages.addEventListener('click', e => {
 
 
 /*** Job Controller ***/
-
+/*
 const controlJob = async () => {
    // Get ID
    const id = window.location.hash.replace('#', '');
@@ -92,6 +94,7 @@ if (id) {
 };
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlJob));
+*/
 
 /*** Likes Controller ***/
 
@@ -144,13 +147,12 @@ const controlLike = () => {
      }
  });
 
- // ** Header title refresh ** // 
+// ** Header title refresh ** // 
 
  const titleClickRefresh = () => {
-   elements.headerTitle.addEventListener('click', e => {
+   elements.headerText.addEventListener('click', e => {
       location.reload();
        });
  }
+ titleClickRefresh(); 
 
- titleClickRefresh();
- 

@@ -13,6 +13,7 @@ import { proxy } from '../config';
     try {
       const res = await axios(`${proxy}https://jobs.github.com/positions.json?description=${this.query}&location=remote`);
       this.result = res.data;
+      console.log(res);
       } catch (error) {
       alert(error);
              }

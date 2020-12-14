@@ -32,22 +32,16 @@ body {
   min-height: calc(100vh - 2 * 4vw);
  }
 
- /* Pre-Loader */
-
-
-
- 
-
 .container {
   background-color: #eeeceb;
   overflow: hidden;
   display: grid;
   grid-template-rows: 1.5fr 5fr;
   /*10rem minmax(100rem, auto);*/
-  grid-template-columns: 3fr;
+  grid-template-columns: 1.5fr 3fr 1fr;
   grid-template-areas: 
   "header header header" 
-  "results results results"
+  "results job job"
   "footer footer footer"; 
 
 }
@@ -183,53 +177,11 @@ cursor: pointer;
 
 /*** Loader ***/
 
-    .loader {
-      box-shadow: 0 0 0 7px #8e99b8, inset 0 0 0 1px  #8e99b8;
-      position: absolute;
-      top: 80%;
-      height: 50px;
-      width: 250px;
-      border-radius: 8px;
-      overflow: hidden;
-      animation: rotate 6s linear infinite;
-      position: absolute;
-      left: 40%;
-    }
-    .loader:before {
-      display: block;
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      background-color:  #7a8bbb;
-      animation: load 6s linear infinite;
-    }
-    @keyframes rotate {
-      0%,
-      42% {
-        transform: rotate(0deg);
-      }
-      48%,
-      92% {
-        transform: rotate(180deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    @keyframes load {
-      0% {
-        width: 0;
-      }
-      40%,
-      50% {
-        width: 100%;
-      }
-      90%,
-      100% {
-        width: 0;
-      }
+.loader {
+    padding: 1em;
+    display: inline-block;
+    margin: 2.5rem 13.5rem;
+    height: 5.5rem;
     }
 
 
@@ -267,32 +219,7 @@ cursor: pointer;
     font-size: 1.5rem;
     }
 
-    /* Collapsible Content */
-    .accordion {
-      width: 800px;
-    }
 
-    .accordion .contentBox {
-    position: relative;
-  margin: 10px 20px;
-    }
-    
-    .accordion .contentBox .label {
-      position: relative;
-      padding: 10px;
-      background: #2694af;
-      color: fff;
-      cursor: pointer;
-    }
-
-    .accordion .contentBox .label:before {
-      content: '+';
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-    }
-    
 /*** Pagination Buttons ***/
 
 .btn {
