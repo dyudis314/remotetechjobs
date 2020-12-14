@@ -38,6 +38,7 @@ const markup = `
                      <h2 class="company_name">${job.company}</h2>
                       <h3 class=""><i>${job.location}</i></h3>
             </button>
+            
             <div class="accordion__content">
                                 <p class="job_description"><span class="visible-xs-inline"><br></span>${job.description}</p>
                                 <br>
