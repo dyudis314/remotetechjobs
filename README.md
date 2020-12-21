@@ -1,5 +1,5 @@
 # remoteup
-Remoteup is a web project that helps people search for remote opportunities in tech.
+Remoteup is a web application that helps people search for remote opportunities in tech.
  It was developed with a modern JavaScript workflow. The application is powered by https://jobs.github.com/
 
 Features
