@@ -1,0 +1,18 @@
+.searchbox {
+margin-top: 20px;
+padding: 16px;
+text-align: center;
+font-size: 36px;
+font-style: italic;
+color: #444;
+box-sizing: border-box;
+outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  font-size: 24px;
+  color: #555;
+}

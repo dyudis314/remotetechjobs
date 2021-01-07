@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Container, Spinner } from 'react-bootstrap';
+import Search from './components/Search';
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   <Container className="container">
+    <div>
+      <Search/>
+        <Spinner 
+          animation="border" 
+          role="status"
+          className="spinner">
+          <span 
+          className="sr-only"
+          >
+            Loading...
+          </span>
+        </Spinner>
     </div>
+    <div>
+    {/* <Results/> */}
+    </div>
+    </Container>
   );
 }
 
