@@ -7,15 +7,16 @@
   margin: 50px;
 }
 
+
 .apply-here {
   position: absolute;
-  left: 350px;
-  top: 75px;
+  right: 50px;
+  top: 15px;
 }
 
 .results-container img {
-width: 60px;
-height: 60px;
+width: 80px;
+height: auto;
 }
 
 .company-logo-wrapper {
@@ -23,7 +24,8 @@ height: 60px;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  height: 100%;
+  width: 80px;
+  height: auto;
 }
 
 .company-logo {

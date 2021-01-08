@@ -1,12 +1,17 @@
-import React, { useState } from 'react'; 
+import React from 'react'; 
 import './Search.css';
 import './Header.css'
 import './Results.css'
 import axios from 'axios';
-import { Form, Col, Row, Button, Card, Accordion, Spinner } from 'react-bootstrap';
+import { Form, Col, Row, Button, Card, Accordion } from 'react-bootstrap';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+const _ = require("lodash");  
+
+
 
 
 class Search extends React.Component {
+
 
   constructor( props ) {
       super( props );
@@ -29,9 +34,11 @@ class Search extends React.Component {
   fetchJobs() { 
    
     return new Promise((resolve, reject) => {
+      this.setState({loading: true });
       axios.get('https://remoteok.io/api').then((res) => {
         if (res.status == 200){
           this.remoteJobs = res.data.slice(1);
+          this.setState({loading: false });
           resolve();
         } else {
           reject(res.status);
@@ -113,20 +120,29 @@ class Search extends React.Component {
   
   
   renderSearchResults = () => {
-    const {results} = this.state;
-    
+  
+    const {results, currentPage, resultsPerPage, loading } = this.state;
+  /*
+    const indexOfLastResult = currentPage * resultsPerPage;
+    const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+    const currentResults = results.slice(indexOfFirstResult, indexOfLastResult);
+    */
 
     if (Object.keys(results).length && results.length) {
-     
+
       return (
         <Row>
+
        
         <div className="results-container">
-          { results.map(result => {
-             
+
+          { /* Lodash Library method to filter out duplicate results */}
+          { _.uniqBy(results).map((result, index) => {
+
+
             return (
               <Card 
-              key={result.id} 
+              key={index} 
               href={result.url} 
               target="_blank" className="result-item"
               variant="success"
@@ -136,7 +152,8 @@ class Search extends React.Component {
              src={result.company_logo} 
              alt={result.company} />
               <Card.Body>
-                <Card.Title className="job-title"> <i>{result.company}</i> |   {result.position}
+                <Card.Title className="job-title"><i>
+                {result.company}</i> | {result.position}
                 </Card.Title>
                 <Card.Text>
                    <p className="posted-on">Posted on {
@@ -148,14 +165,6 @@ class Search extends React.Component {
 
                   //.substr(0,3) + '-' (adds a '-')
                 }</p>
-             
-                <Button 
-                  variant="primary" 
-                  size="lg"
-                  className="apply-here"
-                  href={result.url}>
-                    Apply Here
-                </Button>
                 </Card.Text>
 
                 <Accordion>
@@ -163,6 +172,14 @@ class Search extends React.Component {
                     <Card.Header>
                       <Accordion.Toggle as={Button} variant="link" eventKey="0">
                         Learn More
+                          <Button
+                          target="_blank" 
+                          variant="primary" 
+                          size="sm"
+                          className="apply-here"
+                          href={result.url}>
+                            Apply Here
+                        </Button>
                       </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
@@ -177,8 +194,11 @@ class Search extends React.Component {
       </div>
       </Row>
     )
+      
   }
 };
+
+
 
 
   render() {
@@ -192,6 +212,45 @@ class Search extends React.Component {
 
 // if loading is false render results, ==
 // !state.loading then return results else return spinner
+  const items = [
+    {
+      id: 0,
+      name: 'Cobol'
+    },
+    {
+      id: 1,
+      name: 'JavaScript'
+    },
+    {
+      id: 2,
+      name: 'Basic'
+    },
+    {
+      id: 3,
+      name: 'PHP'
+    },
+    {
+      id: 4,
+      name: 'Java'
+    }
+  ]
+
+  const handleOnSearch = (string, cached) => {
+    // onSearch returns the string searched and if
+    // the values are cached. If the values are cached
+    // "cached" contains the cached values, if not, returns false
+    console.log(string, cached)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
 
     return (
       <div>
@@ -212,21 +271,31 @@ class Search extends React.Component {
               id="search-input"
               onChange = {this.handleOnInputChange}/>
               <i className="fas fa-search search-icon"/>
+              
+              {/* Search Input 
+              <ReactSearchAutocomplete
+            items={items}
+            onSearch={handleOnSearch}
+            onSelect={handleOnSelect}
+            onFocus={handleOnFocus}
+            autoFocus
+          />
+          */}
             </Col>
         </Form>
         </div>
       </Row>
+
+   
 
       <Row>
 
       {/* Results Row */}
 
         <Row>
-          
-       {this.renderSearchResults()}
+     {this.renderSearchResults()}
         </Row> 
       
-    
       </Row>
 
 
