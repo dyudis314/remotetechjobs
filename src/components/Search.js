@@ -2,11 +2,9 @@ import React from 'react';
 import './Search.css';
 import './Header.css'
 import './Results.css'
-import axios from 'axios';
-import { Form, Col, Row, Button, Card, Accordion } from 'react-bootstrap';
+import { Form, Col, Row, Button, Card, Accordion, Pagination } from 'react-bootstrap';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 const _ = require("lodash");  
-
 
 
 
@@ -24,147 +22,85 @@ class Search extends React.Component {
         currentPage: 1,
         resultsPerPage: 5
       };
-
-      this.cancel = '';
-  
-      this.remoteJobs = [];     
-  
+      
+      this.remoteJobs = this.props.jobs;
   }
 
-  fetchJobs() { 
-   
-    return new Promise((resolve, reject) => {
-      this.setState({loading: true });
-      axios.get('https://remoteok.io/api').then((res) => {
-        if (res.status == 200){
-          this.remoteJobs = res.data.slice(1);
-          this.setState({loading: false });
-          resolve();
-        } else {
-          reject(res.status);
-        }
-      })
-    })
-  }
-
-  getOrReturnJobs() {
-    return new Promise((resolve,) => {
-      if (this.remoteJobs.length > 0) {
-        resolve(this.remoteJobs);
-      } else {
-        this.fetchJobs().then(() => resolve(this.remoteJobs));
-        this.setState({
-          loading: false,
-        });
-      }
-    })
-  }
 
   findResults(query) {
     this.setState({
       loading: true
     })
-    this.getOrReturnJobs().then((jobs) => {
-      let queryLowerCase = query.toLowerCase();
-      let foundJobs = [];
-      jobs.forEach((j) => {
-          let validFields = [
-            j.description,
-            j.location,
-            j.position
-          ]
-          // Add all of the tags individually to validFields,
-          // e.g. this way you end up with ["developer", "golang", "js"] instead of ["developer", ["golang", "js"]]
-          validFields = validFields.concat(j.tags);
-          console.log("searching fields", validFields, "for job", j);
-          validFields.forEach((f) => {
-              f = f.toLowerCase();
-              if (f.includes(queryLowerCase) || queryLowerCase.includes(f)) { 
-                foundJobs.push(j);
-              }
-          });
-      });
-      let totalResults = foundJobs.length;
-      let message = `Found ${totalResults} jobs that match query ${query}`
-      console.debug(message);
-      this.setState( {
-        results: foundJobs,
-        message: message,
-        totalResults: totalResults,
-        loading: false,
-    } )
-    }).catch((err) => {
-      console.error(err);
-      this.setState({
-        loading: false,
-        message: "Error"
-      })
-    })
-  }
+    let queryLowerCase = query.toLowerCase();
+    let foundJobs = [];
+    this.props.jobs.forEach((j) => {
+        let validFields = [
+          j.position
+        ]
+        // Add all of the tags individually to validFields,
+        // e.g. this way you end up with ["developer", "golang", "js"] instead of ["developer", ["golang", "js"]]
+       // validFields = validFields.concat(j.tags);
+        console.log("searching fields", validFields, "for job", j);
+        validFields.forEach((f) => {
+            f = f.toLowerCase();
+            if (f.includes(queryLowerCase) || queryLowerCase.includes(f)) { 
+              foundJobs.push(j);
+            }
+        });
+    });
 
+    let totalResults = foundJobs.length;
+    let message = `Found ${totalResults} jobs that match query ${query}`
+    console.debug(message);
+    this.setState( {
+      results: foundJobs,
+      message: message,
+      totalResults: totalResults,
+      loading: false,
+  } )
+}
 
   handleOnInputChange = (event) => {
   const query = event.target.value;
   if (! query ) {
     this.setState( {query, results: {}, message: '' });
    } else { 
-     this.setState({
-        state: query,
-        loading: true,
-        message: '' },
-           () => {
       this.findResults(query);
-      });
     }
   };
   
-  
   renderSearchResults = () => {
-  
-    const {results, currentPage, resultsPerPage, loading } = this.state;
-  /*
-    const indexOfLastResult = currentPage * resultsPerPage;
-    const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-    const currentResults = results.slice(indexOfFirstResult, indexOfLastResult);
-    */
+    const {results } = this.state;
 
     if (Object.keys(results).length && results.length) {
-
+        for (let number = 1; number <= 5;  number ++) {
+        console.log("First result", results[0]);
       return (
         <Row>
 
-       
         <div className="results-container">
 
           { /* Lodash Library method to filter out duplicate results */}
-          { _.uniqBy(results).map((result, index) => {
-
-
+          <Pagination size="sm">
+            { _.uniqBy(results).map((result, index) => {
             return (
-              <Card 
+              <Pagination.Item key={result.link}>
+                <Card 
               key={index} 
-              href={result.url} 
+              href={result.link} 
               target="_blank" className="result-item"
               variant="success"
              >
             <Card.Img 
              variant="top"
              src={result.company_logo} 
-             alt={result.company} />
+             alt={result.company_name} />
               <Card.Body>
                 <Card.Title className="job-title"><i>
-                {result.company}</i> | {result.position}
+                {result.company_name}</i> | {result.position}
                 </Card.Title>
                 <Card.Text>
-                   <p className="posted-on">Posted on {
-                     /* Removes Exact Time and reformats Date to look cleaner
-                     */  
-                    result.date.split('T')[0].slice(5) 
-                    + 
-                    result.date.slice(0,5).replace("-", "")
-
-                  //.substr(0,3) + '-' (adds a '-')
-                }</p>
+                   <p className="posted-on">Posted on {result.posted_on}</p>
                 </Card.Text>
 
                 <Accordion>
@@ -187,31 +123,28 @@ class Search extends React.Component {
                     </Accordion.Collapse>
                   </Card>
                 </Accordion>
+                <Card.Footer>
+                  Source: {result.source}
+                </Card.Footer>
                 </Card.Body>
             </Card>
+            </Pagination.Item>
           )
         }) }
+        </Pagination>
       </div>
       </Row>
-    )
-      
+      )
+    } 
   }
 };
 
 
-
-
   render() {
     const { loading } = this.state;
-
-    //console.log( this.state );
     
-    
-
     console.log(`Rendering, local loading is ${loading}, state loading is ${this.state.loading}`);
 
-// if loading is false render results, ==
-// !state.loading then return results else return spinner
   const items = [
     {
       id: 0,
@@ -251,25 +184,24 @@ class Search extends React.Component {
     console.log('Focused')
   }
 
-
     return (
       <div>
       <Row>
         {/* Heading */}
         <div className="heading">
           <h1>remoteUp</h1>
-            <h5>Work In Tech From Anywhere</h5>
+          <h5>Work In Tech From Anywhere</h5>
         
         {/* Search Input */}
         <Form>
             <Col>
-              <Form.Control placeholder="Search over 10,000 jobs..."
+              <Form.Control placeholder={`Search ${this.props.jobs.length} jobs...`}
               className="searchbox"
               type="text"
               name="query"
               value={this.query}
               id="search-input"
-              onChange = {this.handleOnInputChange}/>
+              onChange = {_.debounce(this.handleOnInputChange, 150)}/>
               <i className="fas fa-search search-icon"/>
               
               {/* Search Input 
@@ -286,18 +218,10 @@ class Search extends React.Component {
         </div>
       </Row>
 
-   
-
-      <Row>
-
       {/* Results Row */}
-
         <Row>
      {this.renderSearchResults()}
         </Row> 
-      
-      </Row>
-
 
       </div>
     )
