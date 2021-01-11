@@ -6,8 +6,6 @@ import { Form, Col, Row, Button, Card, Accordion, Pagination } from 'react-boots
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 const _ = require("lodash");  
 
-
-
 class Search extends React.Component {
 
 
@@ -148,7 +146,7 @@ class Search extends React.Component {
   const items = [
     {
       id: 0,
-      name: 'Cobol'
+      name: 'Developer'
     },
     {
       id: 1,
@@ -156,7 +154,7 @@ class Search extends React.Component {
     },
     {
       id: 2,
-      name: 'Basic'
+      name: 'Frontend Engineer'
     },
     {
       id: 3,
