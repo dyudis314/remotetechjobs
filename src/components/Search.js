@@ -2,7 +2,9 @@ import React from 'react';
 import './Search.css';
 import './Header.css'
 import './Results.css'
-import { Form, Col, Row, Button, Card, Accordion, Pagination } from 'react-bootstrap';
+import { Form, Col, Row, Button, Card, Accordion, Pagination, PageItem } from 'react-bootstrap';
+/*import Pagination from "react-bootstrap-4-pagination";*/
+
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 const _ = require("lodash");  
 
@@ -71,18 +73,28 @@ class Search extends React.Component {
     const {results } = this.state;
 
     if (Object.keys(results).length && results.length) {
+      let active = 1;
+      let items = [];
         for (let number = 1; number <= 5;  number ++) {
+          items.push(
+            <Pagination.Item key={number} active={number === active}>
+          {number}
+            </Pagination.Item>,
+            );
         console.log("First result", results[0]);
       return (
-        <Row>
-
+        
         <div className="results-container">
+          <Pagination>
+
 
           { /* Lodash Library method to filter out duplicate results */}
-          <Pagination size="sm">
+         
             { _.uniqBy(results).map((result, index) => {
             return (
-              <Pagination.Item key={result.link}>
+              
+              
+              <Pagination.Item>
                 <Card 
               key={index} 
               href={result.link} 
@@ -125,13 +137,14 @@ class Search extends React.Component {
                   Source: {result.source}
                 </Card.Footer>
                 </Card.Body>
-            </Card>
+            </Card>  
             </Pagination.Item>
+            
           )
         }) }
         </Pagination>
       </div>
-      </Row>
+      
       )
     } 
   }
