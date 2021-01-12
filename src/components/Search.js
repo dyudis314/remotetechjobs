@@ -67,6 +67,7 @@ class Search extends React.Component {
       this.findResults(query);
     }
   };
+  
 
   /* Pagination */
   handlePageChange = (pageNumber) => {
@@ -78,6 +79,7 @@ class Search extends React.Component {
   
   renderSearchResults = () => {
     const {results } = this.state;
+    const defaultImg = "../img/default.jpg"
 
     if (Object.keys(results).length && results.length) {
      
@@ -85,6 +87,7 @@ class Search extends React.Component {
           
         console.log("First result", results[0]);
       return (
+        
         
         <div className="results-container">
 
@@ -95,12 +98,14 @@ class Search extends React.Component {
             pageRangeDisplayed={ Math.ceil(results.length/10) }
             onChange={this.handlePageChange}
             />
+            
 
           { /* Lodash Library method to filter out duplicate results */}
          
             { _.uniqBy(results).map((result, index) => {
             return (
               
+               
               
               <Card 
               key={index} 
@@ -110,8 +115,18 @@ class Search extends React.Component {
              >
             <Card.Img 
              variant="top"
-             src={result.company_logo} 
-             alt={result.company_name} />
+             src = {
+              result.company_logo
+             ?
+              result.company_logo
+             : 
+              result.company_logo == 
+             "../img/default.jpg"}
+             alt = {
+               result.company_name
+              }                         
+             />
+
               <Card.Body>
                 <Card.Title className="job-title"><i>
                 {result.company_name}</i> | {result.position}
@@ -130,7 +145,7 @@ class Search extends React.Component {
                           variant="primary" 
                           size="sm"
                           className="apply-here"
-                          href={result.url}>
+                          href={result.link}>
                             Apply Here
                         </Button>
                       </Accordion.Toggle>
@@ -138,11 +153,12 @@ class Search extends React.Component {
                     <Accordion.Collapse eventKey="0">
                       <Card.Body>{result.description}</Card.Body>
                     </Accordion.Collapse>
+                    <Card.Footer>
+                      <small>Source: <i>{result.source}</i>
+                      </small>
+                    </Card.Footer>
                   </Card>
                 </Accordion>
-                <Card.Footer>
-                  Source: {result.source}
-                </Card.Footer>
                 </Card.Body>
             </Card>     
           )

@@ -24,7 +24,8 @@ const App = () => {
   })
 
   return (
-   <Container className="container">
+   <Container 
+    className="container">
     <div>
       {jobData ? <Search jobs={jobData}/> : <LoadingSpinner />}
     </div>
