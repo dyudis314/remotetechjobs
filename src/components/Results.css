@@ -4,7 +4,7 @@
 }
 
 .result-item {
-  margin: 50px;
+  margin: 60px;
 }
 
 .apply-here {
@@ -47,12 +47,4 @@ p.message {
   right: 0;
   position: absolute;
   color: rgb(66, 131, 153);
-}
-
-.show {
-  display: inline-block;
-} 
-
-.hide {
-  display: none;
 }

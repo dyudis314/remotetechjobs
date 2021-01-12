@@ -4,8 +4,9 @@ import './Header.css'
 import './Results.css'
 import { Form, Col, Row, Button, Card, Accordion } from 'react-bootstrap';
 import Pagination from "react-pagination-bootstrap";
+import Autosuggest from 'react-bootstrap-autosuggest'
 
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+
 const _ = require("lodash");  
 
 class Search extends React.Component {
@@ -92,6 +93,7 @@ class Search extends React.Component {
         <div className="results-container">
 
             <Pagination
+            className="pagination"
             activePage={this.state.activePage}
             itemsCountPerPage={10}
             totalItemsCount={results.length}
@@ -105,7 +107,6 @@ class Search extends React.Component {
             { _.uniqBy(results).map((result, index) => {
             return (
               
-               
               
               <Card 
               key={index} 
@@ -115,24 +116,29 @@ class Search extends React.Component {
              >
             <Card.Img 
              variant="top"
-             src = {
-              result.company_logo
-             ?
-              result.company_logo
-             : 
-              result.company_logo == 
-             "../img/default.jpg"}
-             alt = {
-               result.company_name
-              }                         
+             src = {result.company_logo}
+             onerror={this.src= defaultImg}             
              />
 
               <Card.Body>
                 <Card.Title className="job-title"><i>
-                {result.company_name}</i> | {result.position}
+                {
+                result.company_name !==
+                 ""
+                 ?
+                 result.company_name
+                 :
+                 "Company Name Not Found"
+                }</i> | {result.position}
                 </Card.Title>
                 <Card.Text>
-                   <p className="posted-on">Posted on {result.posted_on}</p>
+                  <p className="tags">
+                    <i>
+                  #{result.tags[0]} #{result.tags[1]} #{result.tags[2]}
+                  </i>
+                  </p>
+                   <p className="posted-on">Posted on {result.posted_on}
+                   </p>
                 </Card.Text>
 
                 <Accordion>
@@ -146,12 +152,21 @@ class Search extends React.Component {
                           size="sm"
                           className="apply-here"
                           href={result.link}>
-                            Apply Here
+                            Apply
                         </Button>
                       </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
-                      <Card.Body>{result.description}</Card.Body>
+                      <Card.Body>{result.description}
+                      <br></br><br></br>
+                        <Button 
+                        variant="primary" 
+                        size="sm"
+                        href={result.link}
+                        target="_blank">
+                        Full Description
+                        </Button>
+                      </Card.Body> 
                     </Accordion.Collapse>
                     <Card.Footer>
                       <small>Source: <i>{result.source}</i>
@@ -175,54 +190,16 @@ class Search extends React.Component {
     const { loading } = this.state;
     
     console.log(`Rendering, local loading is ${loading}, state loading is ${this.state.loading}`);
-
-  const items = [
-    {
-      id: 0,
-      name: 'Developer'
-    },
-    {
-      id: 1,
-      name: 'JavaScript'
-    },
-    {
-      id: 2,
-      name: 'Frontend Engineer'
-    },
-    {
-      id: 3,
-      name: 'PHP'
-    },
-    {
-      id: 4,
-      name: 'Java'
-    }
-  ]
-
-  const handleOnSearch = (string, cached) => {
-    // onSearch returns the string searched and if
-    // the values are cached. If the values are cached
-    // "cached" contains the cached values, if not, returns false
-    console.log(string, cached)
-  }
-
-  const handleOnSelect = (item) => {
-    // the item selected
-    console.log(item)
-  }
-
-  const handleOnFocus = () => {
-    console.log('Focused')
-  }
-
+    
     return (
       <div>
       <Row>
         {/* Heading */}
         <div className="heading">
+            <div className="heading-text">
           <h1>remoteUp</h1>
           <h5>Work In Tech From Anywhere</h5>
-        
+            </div>
         {/* Search Input */}
         <Form>
             <Col>
@@ -236,7 +213,7 @@ class Search extends React.Component {
               <i className="fas fa-search search-icon"/>
               
               {/* Search Input 
-              <ReactSearchAutocomplete
+              ReactSearchAutocomplete
             items={items}
             onSearch={handleOnSearch}
             onSelect={handleOnSelect}

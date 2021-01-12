@@ -12,6 +12,8 @@
     "mdbreact": "^5.0.1",
     "react": "^17.0.1",
     "react-bootstrap-4-pagination": "^1.0.3",
+    "react-bootstrap-autosuggest": "^0.5.0",
+    "react-bootstrap-typeahead": "^5.1.4",
     "react-dom": "^17.0.1",
     "react-pagination-bootstrap": "^1.0.3",
     "react-scripts": "4.0.1",

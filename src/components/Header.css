@@ -12,6 +12,12 @@
   background-position: center center; 
 }
 
-.header_text {
-  text-align: center;
+.heading-text {
+  color: #444;
+  transition: all 0.4s;
+}
+
+.heading-text:hover {
+  color: black;
+  cursor: pointer;
 }
