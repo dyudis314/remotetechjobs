@@ -13,6 +13,7 @@
     "react": "^17.0.1",
     "react-bootstrap-4-pagination": "^1.0.3",
     "react-dom": "^17.0.1",
+    "react-pagination-bootstrap": "^1.0.3",
     "react-scripts": "4.0.1",
     "react-search-autocomplete": "^2.0.0",
     "web-vitals": "^0.2.4"

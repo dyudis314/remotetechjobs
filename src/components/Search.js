@@ -2,8 +2,8 @@ import React from 'react';
 import './Search.css';
 import './Header.css'
 import './Results.css'
-import { Form, Col, Row, Button, Card, Accordion, Pagination, PageItem } from 'react-bootstrap';
-/*import Pagination from "react-bootstrap-4-pagination";*/
+import { Form, Col, Row, Button, Card, Accordion } from 'react-bootstrap';
+import Pagination from "react-pagination-bootstrap";
 
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 const _ = require("lodash");  
@@ -19,8 +19,7 @@ class Search extends React.Component {
         results: {},
         loading: false,
         message: '',
-        currentPage: 1,
-        resultsPerPage: 5
+        activePage: 1
       };
       
       this.remoteJobs = this.props.jobs;
@@ -68,25 +67,34 @@ class Search extends React.Component {
       this.findResults(query);
     }
   };
+
+  /* Pagination */
+  handlePageChange = (pageNumber) => {
+    console.log(`active page is ${pageNumber}`);
+    this.setState( {
+      activePage: pageNumber      
+    } );
+  }
   
   renderSearchResults = () => {
     const {results } = this.state;
 
     if (Object.keys(results).length && results.length) {
-      let active = 1;
-      let items = [];
+     
         for (let number = 1; number <= 5;  number ++) {
-          items.push(
-            <Pagination.Item key={number} active={number === active}>
-          {number}
-            </Pagination.Item>,
-            );
+          
         console.log("First result", results[0]);
       return (
         
         <div className="results-container">
-          <Pagination>
 
+            <Pagination
+            activePage={this.state.activePage}
+            itemsCountPerPage={10}
+            totalItemsCount={results.length}
+            pageRangeDisplayed={ Math.ceil(results.length/10) }
+            onChange={this.handlePageChange}
+            />
 
           { /* Lodash Library method to filter out duplicate results */}
          
@@ -94,8 +102,7 @@ class Search extends React.Component {
             return (
               
               
-              <Pagination.Item>
-                <Card 
+              <Card 
               key={index} 
               href={result.link} 
               target="_blank" className="result-item"
@@ -137,12 +144,9 @@ class Search extends React.Component {
                   Source: {result.source}
                 </Card.Footer>
                 </Card.Body>
-            </Card>  
-            </Pagination.Item>
-            
+            </Card>     
           )
         }) }
-        </Pagination>
       </div>
       
       )
