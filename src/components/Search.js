@@ -4,7 +4,7 @@ import './Header.css'
 import './Results.css'
 import { Form, Col, Row, Button, Card, Accordion, Badge } from 'react-bootstrap';
 import Pagination from "react-pagination-bootstrap";
-import Autosuggest from 'react-bootstrap-autosuggest'
+
 
 
 const _ = require("lodash");  
