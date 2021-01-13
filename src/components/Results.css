@@ -7,10 +7,27 @@
   margin: 60px;
 }
 
+
 .apply-here {
-  position: absolute;
-  right: 50px;
-  top: 15px;
+  position: relative;
+  left: 25px;
+}
+
+
+.date {
+  position: relative;
+  top: 10px;
+}
+
+.posted-on {
+  position: relative;
+  left: 25px;
+  bottom: 25px;
+}
+
+.location {
+  position: relative;
+  top: 5px;
 }
 
 .results-container img {

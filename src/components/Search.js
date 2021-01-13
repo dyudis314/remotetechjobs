@@ -2,7 +2,7 @@ import React from 'react';
 import './Search.css';
 import './Header.css'
 import './Results.css'
-import { Form, Col, Row, Button, Card, Accordion } from 'react-bootstrap';
+import { Form, Col, Row, Button, Card, Accordion, Badge } from 'react-bootstrap';
 import Pagination from "react-pagination-bootstrap";
 import Autosuggest from 'react-bootstrap-autosuggest'
 
@@ -117,7 +117,7 @@ class Search extends React.Component {
             <Card.Img 
              variant="top"
              src = {result.company_logo}
-             onerror={this.src= defaultImg}             
+             onError={this.src= defaultImg}             
              />
 
               <Card.Body>
@@ -130,6 +130,12 @@ class Search extends React.Component {
                  :
                  "Company Name Not Found"
                 }</i> | {result.position}
+                <h5>
+                  <Badge 
+                  className="location"
+                  variant="secondary">{result.location}                
+                </Badge>
+                </h5>
                 </Card.Title>
                 <Card.Text>
                   <p className="tags">
@@ -137,23 +143,17 @@ class Search extends React.Component {
                   #{result.tags[0]} #{result.tags[1]} #{result.tags[2]}
                   </i>
                   </p>
-                   <p className="posted-on">Posted on {result.posted_on}
-                   </p>
+                  <div className="date">
+                    <i class="far fa-clock"></i><p className="posted-on">Posted on {result.posted_on}
+                    </p>
+                  </div>                                  
                 </Card.Text>
 
                 <Accordion>
                   <Card>
                     <Card.Header>
                       <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                        Learn More
-                          <Button
-                          target="_blank" 
-                          variant="primary" 
-                          size="sm"
-                          className="apply-here"
-                          href={result.link}>
-                            Apply
-                        </Button>
+                        Learn More                         
                       </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
@@ -166,6 +166,14 @@ class Search extends React.Component {
                         target="_blank">
                         Full Description
                         </Button>
+                          <Button
+                            target="_blank" 
+                            variant="primary" 
+                            size="sm"
+                            className="apply-here"
+                            href={result.link}>
+                              Apply
+                          </Button>
                       </Card.Body> 
                     </Accordion.Collapse>
                     <Card.Footer>
@@ -203,24 +211,15 @@ class Search extends React.Component {
         {/* Search Input */}
         <Form>
             <Col>
-              <Form.Control placeholder={`Search ${this.props.jobs.length} jobs...`}
+              <Form.Control 
+              placeholder={`Search ${this.props.jobs.length} jobs...`}
               className="searchbox"
               type="text"
               name="query"
               value={this.query}
               id="search-input"
               onChange = {_.debounce(this.handleOnInputChange, 150)}/>
-              <i className="fas fa-search search-icon"/>
-              
-              {/* Search Input 
-              ReactSearchAutocomplete
-            items={items}
-            onSearch={handleOnSearch}
-            onSelect={handleOnSelect}
-            onFocus={handleOnFocus}
-            autoFocus
-          />
-          */}
+              <i className="fas fa-search search-icon"/>                            
             </Col>
         </Form>
         </div>
