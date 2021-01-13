@@ -164,16 +164,8 @@ class Search extends React.Component {
                         size="sm"
                         href={result.link}
                         target="_blank">
-                        Full Description
-                        </Button>
-                          <Button
-                            target="_blank" 
-                            variant="primary" 
-                            size="sm"
-                            className="apply-here"
-                            href={result.link}>
-                              Apply
-                          </Button>
+                        Apply
+                        </Button>                                              
                       </Card.Body> 
                     </Accordion.Collapse>
                     <Card.Footer>
