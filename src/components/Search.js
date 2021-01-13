@@ -4,9 +4,8 @@ import './Header.css'
 import './Results.css'
 import { Form, Col, Row, Button, Card, Accordion, Badge } from 'react-bootstrap';
 import Pagination from "react-pagination-bootstrap";
-
-
-const _ = require("lodash");  
+import AutoType from './AutoType.Js';
+const _ = require("lodash"); 
 
 class Search extends React.Component {
 
@@ -186,6 +185,7 @@ class Search extends React.Component {
 
 
   render() {
+
     const { loading } = this.state;
     
     console.log(`Rendering, local loading is ${loading}, state loading is ${this.state.loading}`);
@@ -201,17 +201,25 @@ class Search extends React.Component {
             </div>
         {/* Search Input */}
         <Form>
-            <Col>
+            <Col>  
               <Form.Control 
-              placeholder={`Search ${this.props.jobs.length} jobs...`}
+              placeholder={`Search ${this.props.jobs.length} remote tech jobs...`}
               className="searchbox"
               type="text"
               name="query"
               value={this.query}
               id="search-input"
               onChange = {_.debounce(this.handleOnInputChange, 150)}/>
-              <i className="fas fa-search search-icon"/>                            
-            </Col>
+              <i className="fas fa-search search-icon"/>
+            </Col>  
+            {/*
+              <AutoType  
+              strings={[
+                'Some <i>strings</i> are slanted',
+                'Some <strong>strings</strong> are bold',
+                'HTML characters &times; &copy;'
+              ]}
+            />  */}     
         </Form>
         </div>
       </Row>
