@@ -6,7 +6,6 @@ import { Form, Col, Row, Button, Card, Accordion, Badge } from 'react-bootstrap'
 import Pagination from "react-pagination-bootstrap";
 
 
-
 const _ = require("lodash");  
 
 class Search extends React.Component {

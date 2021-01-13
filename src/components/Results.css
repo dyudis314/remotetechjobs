@@ -42,6 +42,10 @@ width: 100%;
 height: 200px;
 }
 
+.job-title {
+  text-transform: capitalize;
+}
+
 /* Error Message */
 p.message {
   text-align: center;
