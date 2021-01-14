@@ -1,3 +1,4 @@
+
 .results-container {
   display: inline;
   flex-flow: wrap;
@@ -5,6 +6,13 @@
 
 .result-item {
   margin: 60px;
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+}
+
+.result-item:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); 
 }
 
 .date {
@@ -45,6 +53,7 @@ height: 200px;
 .job-title {
   text-transform: capitalize;
 }
+
 
 /* Error Message */
 p.message {

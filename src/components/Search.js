@@ -1,10 +1,9 @@
 import React from 'react'; 
 import './Search.css';
-import './Header.css'
 import './Results.css'
-import { Container, Form, Col, Row, Button, Card, Accordion, Badge, Pagination } from 'react-bootstrap';
+import { Container, Form, Col, Row } from 'react-bootstrap';
 import ResultCard from './Card';
-import AutoType from './AutoType.Js';
+import AutoComplete from './AutoComplete.Js'
 const _ = require("lodash"); 
 
 class Search extends React.Component {
@@ -23,9 +22,6 @@ class Search extends React.Component {
       
       this.remoteJobs = this.props.jobs;
   }
-
-  // render top 10 jobs on load --> results in state ^^ would be this.props.jobs[10]
-
 
   findResults(query) {
     this.setState({
@@ -70,84 +66,51 @@ class Search extends React.Component {
     }
   };
   
-
-  /* Pagination */
-  handlePageChange = (pageNumber) => {
-    console.log(`active page is ${pageNumber}`);
-    this.setState( {
-      activePage: pageNumber      
-    } );
-  }
-
-  mostRecentJobs = () => {
-    console.log('it works')
-       // return 10 of <h1>"today's jobs"<h1> with "new badge" and clear upon new search                 
-    }
-    
-  renderJobsOnLoad = () => {
-    const { results } = this.state;
-    document.addEventListener("DOMContentLoaded", (this.mostRecentJobs))
-  }
-  
   renderSearchResults = () => {
     const { results } = this.state;
     console.log("Rendering search results with results", typeof(results));
     if (results.length == 0) {
       return;
     }
-    const defaultImg = "../img/default.jpg"
-
-
-      return (
-        
+    
+      return (   
         
         <div className="results-container">
-
-          
-            {/*<Pagination
-            className="pagination"
-            activePage={this.state.activePage}
-            itemsCountPerPage={10}
-            totalItemsCount={results.length}
-            pageRangeDisplayed={ Math.ceil(results.length/10) }
-            onChange={this.handlePageChange}
-            >*/}
             <Container>
-            <Pagination bsName="test" size="sm">
-
-            {/*_.uniqBy(results).map((result, index) => {
-              <Pagination.Item key={index} active={(index+1 === this.state.activePage)}>
-                test
-              </Pagination.Item>
-            })*/}
-              {results.map((result, index) => {
-                return <Pagination.Item key={index} active={(index+1 === this.state.activePage)}>
-                      {ResultCard(result)}
-                  </Pagination.Item>
-              })}
-             
-            </Pagination>
+              {_.uniqBy(results).map((result, index) => {
+                return <div>
+                        {ResultCard(result)}
+                       </div>
+              })}             
             </Container>
-
-      </div>
-    
+      </div>  
       )
   };
+
+                /* Pagination Component */
+  /*
+          <Pagination bsName="test" size="sm">
+
+        {_.uniqBy(results).map((result, index) => {
+            <Pagination.Item 
+              key={index} 
+              active={(index + 1 === this.state.activePage)}>
+                    {ResultCard(result)}
+            </Pagination.Item>
+          </Pagination>
+  */
   
-
-
 
   render() {
 
     const { loading, results } = this.state;
-    
-    console.log(`Rendering, local loading is ${loading}, state loading is ${this.state.loading}`);
-    
+  
     return (
       <div>
         {/* Heading */}
         <div className="heading">
             <div className="heading-text">
+              
           <h1>remoteUp</h1>
           <h5>Work In Tech From Anywhere</h5>
             </div>
@@ -164,14 +127,6 @@ class Search extends React.Component {
               onChange = {_.debounce(this.handleOnInputChange, 150)}/>
               <i className="fas fa-search search-icon"/>
             </Col>  
-            {/*
-              <AutoType  
-              strings={[
-                'Some <i>strings</i> are slanted',
-                'Some <strong>strings</strong> are bold',
-                'HTML characters &times; &copy;'
-              ]}
-            />  */}     
         </Form>
         </div>
 

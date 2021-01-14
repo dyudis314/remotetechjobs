@@ -1,8 +1,14 @@
 import React from 'react';
 import { Card, Accordion, Button, Badge } from 'react-bootstrap';
-const defaultImg = "../img/default.jpg"
+import ScrollAnimation from 'react-animate-on-scroll';
+
 const ResultCard = (result) => {
+  if (! result.company_name == "") {
   return ( 
+<ScrollAnimation
+delay={150}
+animateIn="fadeIn"
+animateOut='fadeOut'>
     <Card 
     href={result.link} 
     target="_blank" className="result-item"
@@ -12,14 +18,7 @@ const ResultCard = (result) => {
 
     <Card.Body>
       <Card.Title className="job-title"><i>
-      {
-      result.company_name !==
-       ""
-       ?
-       result.company_name
-       :
-       "Company Name Not Found"
-      }</i> | {result.position}
+      {result.company_name}</i> | {result.position}
       <h5>
         <Badge 
         className="location"
@@ -65,8 +64,10 @@ const ResultCard = (result) => {
         </Card>
       </Accordion>
       </Card.Body>
-  </Card> 
-  )
+  </Card>
+  </ScrollAnimation> 
+    )
+  }
 }
 
 export default ResultCard;

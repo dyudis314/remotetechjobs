@@ -1,11 +1,30 @@
-
 .container {
   margin: auto;
-  width: 100%;
-  max-width: 800px;
 }
 
 .footer {
   margin: auto;
   width: 50%;
+}
+
+body::-webkit-scrollbar-track {
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+body::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+  left bottom,
+	left top,
+	color-stop(0.44, rgba(122, 154, 217, 0.692)),
+	color-stop(0.72, rgba(73, 125, 189, 0.76)),
+	color-stop(0.86, rgba(66, 87, 151, 0.808)));
 }
