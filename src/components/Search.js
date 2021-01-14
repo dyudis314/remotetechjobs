@@ -80,6 +80,7 @@ class Search extends React.Component {
     const {results } = this.state;
     const defaultImg = "../img/default.jpg"
 
+    // if page loads then RENDER
     if (Object.keys(results).length && results.length) {
      
         for (let number = 1; number <= 5;  number ++) {

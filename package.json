@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "evergreen-ui": "^5.1.2",
     "lodash": "^4.17.20",
     "lodash.uniqby": "^4.7.0",
     "mdbreact": "^5.0.1",
