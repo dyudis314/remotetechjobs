@@ -1,5 +1,11 @@
+
 .container {
-  margin: 16px auto;
+  margin: auto;
   width: 100%;
   max-width: 800px;
+}
+
+.footer {
+  margin: auto;
+  width: 50%;
 }

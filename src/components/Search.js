@@ -75,12 +75,21 @@ class Search extends React.Component {
       activePage: pageNumber      
     } );
   }
+
+  mostRecentJobs = () => {
+    console.log('it works')
+       // return 10 of <h1>"today's jobs"<h1> with "new badge" and clear upon new search                 
+    }
+    
+  renderJobsOnLoad = () => {
+    const { results } = this.state;
+    document.addEventListener("DOMContentLoaded", (this.mostRecentJobs))
+  }
   
   renderSearchResults = () => {
     const {results } = this.state;
     const defaultImg = "../img/default.jpg"
 
-    // if page loads then RENDER
     if (Object.keys(results).length && results.length) {
      
         for (let number = 1; number <= 5;  number ++) {
@@ -193,7 +202,6 @@ class Search extends React.Component {
     
     return (
       <div>
-      <Row>
         {/* Heading */}
         <div className="heading">
             <div className="heading-text">
@@ -223,7 +231,6 @@ class Search extends React.Component {
             />  */}     
         </Form>
         </div>
-      </Row>
 
       {/* Results Row */}
         <Row>
